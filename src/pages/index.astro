@@ -42,7 +42,7 @@ import DroneHero from '../components/DroneHero.astro';
 
       <div class="cta-row reveal">
         <div class="big display">All standings.<br>All majors. <span>All welcome.</span></div>
-        <a class="btn primary" href="/join">Apply this semester →</a>
+        <a class="btn primary" href="/join">Apply this quarter →</a>
       </div>
     </div>
   </section>
@@ -53,9 +53,15 @@ import DroneHero from '../components/DroneHero.astro';
       <p class="sponsors-label mono reveal">Club Sponsors</p>
       <p class="sponsors-sub reveal" data-delay="1">The design, simulation, and analysis tools behind our aircraft.</p>
       <div class="logo-row reveal" data-delay="1">
-        <div class="logo-card"><img src="/sponsors/solidworks.png" alt="SolidWorks" loading="lazy" /></div>
-        <div class="logo-card"><img src="/sponsors/ansys.png" alt="Ansys" loading="lazy" /></div>
-        <div class="logo-card"><img src="/sponsors/simscale.png" alt="SimScale" loading="lazy" /></div>
+        <a class="logo-card" href="https://www.solidworks.com" target="_blank" rel="noopener noreferrer">
+          <img src="/sponsors/solidworks.png" alt="SolidWorks" loading="lazy" />
+        </a>
+        <a class="logo-card" href="https://www.ansys.com" target="_blank" rel="noopener noreferrer">
+          <img src="/sponsors/ansys.png" alt="Ansys" loading="lazy" />
+        </a>
+        <a class="logo-card" href="https://www.simscale.com" target="_blank" rel="noopener noreferrer">
+          <img src="/sponsors/simscale.png" alt="SimScale" loading="lazy" />
+        </a>
       </div>
     </div>
   </section>
@@ -79,6 +85,7 @@ import DroneHero from '../components/DroneHero.astro';
   .logo-row{margin:46px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:860px}
   .logo-card{background:#fafafc;border:1px solid var(--line-soft);border-radius:14px;
     min-height:132px;display:flex;align-items:center;justify-content:center;padding:32px 26px;
+    color:inherit;text-decoration:none;cursor:pointer;
     transition:transform .25s ease,box-shadow .25s ease}
   .logo-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.35)}
   .logo-card img{max-height:60px;width:auto;max-width:100%;object-fit:contain}
