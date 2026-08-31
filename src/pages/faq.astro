@@ -1,0 +1,65 @@
+---
+import Base from '../layouts/Base.astro';
+
+const faqs = [
+  { q: 'What is IARC Mission 10?', a: 'Our current focus is IARC Mission 10: a swarm of fully autonomous drones that coordinate to guide a person safely through a simulated minefield \u2014 mapping the field, sharing data, and finding the safest route with no remote pilot.' },
+  { q: 'Do I need experience with drones or robotics?', a: 'No. We take members of all academic standings and experience levels \u2014 curiosity and commitment matter more than a r\u00e9sum\u00e9, and you\u2019ll learn by building. Applications are competitive, so tell us what you\u2019re excited to work on.' },
+  { q: 'Can I join if I\u2019m not an engineering major?', a: 'Yes. We welcome students from all majors. Most of our work is technical, but anyone interested in programming, electronics, or hands-on building is encouraged to apply. If you\u2019re willing to learn and contribute, there\u2019s a place for you.' },
+  { q: 'Which subteam should I join?', a: 'Hardware covers CAD, avionics, prototyping and manufacturing, PCB design, and embedded electronics. Software covers ROS (C++/Python), PX4 and Bitcraze flight software, computer vision, path planning, and SLAM. Not sure? Apply anyway and tell us what you\u2019re curious about.' },
+  { q: 'When do applications open?', a: 'Applications open in fall 2026. Watch our Instagram and the Updates page for the exact window and deadline.' },
+  { q: 'How much time commitment is expected?', a: 'There is a 1-hour all-team meeting every other week, plus a 1-hour subteam meeting each week. On top of that, expect a couple of hours per week working independently on your assigned tasks. The exact commitment varies with your role and availability.' },
+  { q: 'How can I stay updated?', a: 'Follow @uw_waar on Instagram and check this site for updates, events, and recruitment opportunities.' },
+];
+---
+<Base title="FAQ · Washington Aerial Robotics">
+  <section class="page-head">
+    <div class="container">
+      <p class="eyebrow reveal">Questions</p>
+      <h1 class="reveal" data-delay="1"><span class="accent">FAQ</span></h1>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container narrow">
+      <div class="faqs">
+        {faqs.map((f, i) => (
+          <details class="faq reveal" data-delay={String(Math.min(i, 3))} open={i === 0}>
+            <summary>
+              <span class="mono qn">{String(i + 1).padStart(2, '0')}</span>
+              <span class="qt">{f.q}</span>
+              <span class="chev" aria-hidden="true">+</span>
+            </summary>
+            <p class="a">{f.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="still reveal">
+        <span>Still have questions?</span>
+        <div style="display:flex;flex-wrap:wrap;gap:12px">
+          <a class="btn primary" href="mailto:washingtonaerialrobotics@gmail.com">Email the team</a>
+          <a class="btn" href="https://www.instagram.com/uw_waar/" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .narrow{max-width:840px}
+  .faqs{border-top:1px solid var(--line-soft)}
+  .faq{border-bottom:1px solid var(--line-soft)}
+  summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:18px;padding:26px 4px;
+    transition:color .2s}
+  summary::-webkit-details-marker{display:none}
+  .qn{color:var(--gold);font-size:12px;letter-spacing:.15em}
+  .qt{font-family:"Chakra Petch",sans-serif;font-size:clamp(16px,2vw,21px);flex:1;text-transform:none;letter-spacing:0}
+  .chev{font-family:"IBM Plex Mono",monospace;color:var(--purple);font-size:20px;transition:transform .25s}
+  .faq[open] .chev{transform:rotate(45deg)}
+  summary:hover .qt{color:var(--purple)}
+  .a{color:var(--muted);font-size:15.5px;line-height:1.7;padding:0 4px 28px 44px;max-width:64ch}
+  .still{margin-top:56px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
+    border:1px solid var(--line-soft);padding:28px clamp(22px,3vw,36px);background:var(--bg-2)}
+  .still span{font-family:"Chakra Petch",sans-serif;font-size:20px;text-transform:uppercase}
+  @media (max-width:560px){.a{padding-left:4px}}
+</style>

@@ -1,0 +1,118 @@
+/* ============================================================
+   WAAR design system
+   Palette: UW purple (primary signal) + gold (restrained accent)
+   Type: Chakra Petch (display/HUD) · IBM Plex Sans (body) · IBM Plex Mono (data)
+   ============================================================ */
+
+:root{
+  --bg:#0A0713;
+  --bg-2:#120C1F;
+  --panel:rgba(18,12,31,.6);
+
+  --purple:#9D7BFF;        /* primary signal */
+  --purple-deep:#4B2E83;   /* UW official purple, used in gradients */
+  --purple-dim:#5B4299;
+
+  --gold:#D8B45A;          /* secondary accent — live data, emphasis */
+  --gold-deep:#85754D;     /* UW metallic gold, subtle */
+
+  --text:#ECE8F6;
+  --muted:#9A8FB0;
+
+  --line:rgba(157,123,255,.20);
+  --line-soft:rgba(154,143,176,.16);
+
+  --maxw:1240px;
+  --pad:clamp(24px,7vw,110px);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  line-height:1.5;
+}
+a{color:inherit}
+img{max-width:100%;display:block}
+
+/* ---- shared layout ---- */
+.container{max-width:var(--maxw);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+.section{padding:clamp(70px,12vh,150px) 0}
+
+/* ---- type helpers ---- */
+.display{font-family:"Chakra Petch",sans-serif;text-transform:uppercase;letter-spacing:-.01em;line-height:.95}
+.mono{font-family:"IBM Plex Mono",monospace}
+
+.eyebrow{
+  font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.3em;
+  color:var(--muted);text-transform:uppercase;display:flex;align-items:center;gap:14px;
+}
+.eyebrow::before{content:"";width:32px;height:1px;background:var(--purple);opacity:.75}
+.eyebrow.gold::before{background:var(--gold)}
+
+h1,h2,h3{font-family:"Chakra Petch",sans-serif;text-transform:uppercase;letter-spacing:-.01em;line-height:.98}
+h2{font-size:clamp(30px,5vw,60px);font-weight:600}
+h2 em{font-style:normal;color:var(--purple)}
+h3{font-size:24px;font-weight:600}
+
+.lead{font-size:clamp(15px,1.5vw,19px);line-height:1.6;color:#C6BFD8;max-width:60ch}
+
+/* ---- buttons ---- */
+.btn{
+  display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:12.5px;
+  letter-spacing:.14em;text-transform:uppercase;padding:15px 26px;
+  border:1px solid var(--line);color:var(--text);text-decoration:none;
+  background:rgba(18,12,31,.4);backdrop-filter:blur(6px);
+  transition:border-color .25s,color .25s,box-shadow .25s,background .25s;cursor:pointer;
+}
+.btn:hover,.btn:focus-visible{
+  border-color:var(--purple);color:var(--purple);
+  box-shadow:0 0 0 1px var(--purple),0 8px 30px rgba(157,123,255,.18);outline:none;
+}
+.btn.primary{background:var(--purple);color:#0B0714;border-color:var(--purple);font-weight:600}
+.btn.primary:hover,.btn.primary:focus-visible{
+  color:#0B0714;box-shadow:0 8px 34px rgba(157,123,255,.42);background:#B49AFF;border-color:#B49AFF;
+}
+.btn.gold{background:var(--gold);color:#1A1305;border-color:var(--gold);font-weight:600}
+.btn.gold:hover,.btn.gold:focus-visible{color:#1A1305;box-shadow:0 8px 34px rgba(216,180,90,.4);background:#E5C777;border-color:#E5C777}
+
+/* ---- chips / tags ---- */
+.chip{
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;
+  color:var(--purple);border:1px solid var(--line);padding:5px 10px;border-radius:2px;white-space:nowrap;
+}
+
+/* ---- scroll reveal (IntersectionObserver adds .in) ---- */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.reveal[data-delay="1"]{transition-delay:.1s}
+.reveal[data-delay="2"]{transition-delay:.2s}
+.reveal[data-delay="3"]{transition-delay:.3s}
+
+/* ---- page header block used across inner pages ---- */
+.page-head{padding:clamp(120px,20vh,220px) 0 clamp(40px,6vh,70px)}
+.page-head h1{font-size:clamp(40px,8vw,104px);font-weight:700}
+.page-head .accent{color:var(--purple)}
+
+/* ---- generic card grid ---- */
+.grid{display:grid;gap:1px;background:var(--line-soft);border:1px solid var(--line-soft)}
+.grid-2{grid-template-columns:repeat(2,1fr)}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+.cell{background:var(--bg-2);padding:clamp(26px,3vw,42px)}
+.cell .num{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--gold);letter-spacing:.2em}
+
+@media (max-width:820px){
+  .grid-2,.grid-3{grid-template-columns:1fr}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none;transition:none}
+}
+
+/* ---- focus visibility floor ---- */
+:focus-visible{outline:2px solid var(--purple);outline-offset:3px}

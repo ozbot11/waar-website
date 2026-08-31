@@ -1,0 +1,90 @@
+---
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/drones', label: 'Drones' },
+  { href: '/team', label: 'Team' },
+  { href: '/updates', label: 'Updates' },
+  { href: '/faq', label: 'FAQ' },
+];
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path === href || path.startsWith(href + '/');
+---
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">
+      <span class="mark">▲</span>
+      <span class="wordmark">WAAR</span>
+    </a>
+
+    <nav class="links" aria-label="Primary">
+      {links.map((l) => (
+        <a href={l.href} class:list={['link', { active: isActive(l.href) }]}>{l.label}</a>
+      ))}
+    </nav>
+
+    <a class="join" href="/join">Join us</a>
+
+    <button class="burger" aria-label="Menu" aria-expanded="false" id="burger">
+      <span></span><span></span>
+    </button>
+  </div>
+
+  <div class="drawer" id="drawer" hidden>
+    {links.concat({ href: '/join', label: 'Join us' }).map((l) => (
+      <a href={l.href} class="drawer-link">{l.label}</a>
+    ))}
+  </div>
+</header>
+
+<style>
+  .nav{position:fixed;top:0;left:0;right:0;z-index:50;
+    backdrop-filter:blur(10px);background:rgba(10,7,19,.55);
+    border-bottom:1px solid var(--line-soft)}
+  .nav-inner{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad);height:66px;
+    display:flex;align-items:center;gap:26px}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;margin-right:auto}
+  .mark{color:var(--purple);font-size:13px;transform:translateY(-1px)}
+  .wordmark{font-family:"Chakra Petch",sans-serif;font-weight:700;letter-spacing:.12em;font-size:17px}
+  .links{display:flex;gap:26px}
+  .link{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--muted);text-decoration:none;position:relative;padding:4px 0;
+    transition:color .2s}
+  .link:hover{color:var(--text)}
+  .link.active{color:var(--text)}
+  .link.active::after{content:"";position:absolute;left:0;bottom:-2px;width:100%;height:1px;background:var(--purple)}
+  .join{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+    color:#0B0714;background:var(--gold);text-decoration:none;padding:9px 18px;font-weight:600;
+    transition:background .2s,box-shadow .2s}
+  .join:hover{background:#E5C777;box-shadow:0 6px 22px rgba(216,180,90,.35)}
+  .burger{display:none;background:none;border:0;cursor:pointer;flex-direction:column;gap:5px;padding:8px}
+  .burger span{width:22px;height:2px;background:var(--text);transition:.25s}
+  .drawer{display:none;flex-direction:column;border-top:1px solid var(--line-soft);background:rgba(10,7,19,.96)}
+  .drawer-link{font-family:"IBM Plex Mono",monospace;font-size:14px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--text);text-decoration:none;padding:16px var(--pad);border-bottom:1px solid var(--line-soft)}
+
+  @media (max-width:900px){
+    .links,.join{display:none}
+    .burger{display:flex}
+    .drawer[data-open]{display:flex}
+  }
+</style>
+
+<script>
+  const burger = document.getElementById('burger');
+  const drawer = document.getElementById('drawer');
+  burger?.addEventListener('click', () => {
+    const open = drawer?.hasAttribute('data-open');
+    if (open) {
+      drawer?.removeAttribute('data-open');
+      drawer?.setAttribute('hidden', '');
+      burger?.setAttribute('aria-expanded', 'false');
+    } else {
+      drawer?.setAttribute('data-open', '');
+      drawer?.removeAttribute('hidden');
+      burger?.setAttribute('aria-expanded', 'true');
+    }
+  });
+</script>

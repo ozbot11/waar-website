@@ -1,0 +1,21 @@
+{
+  "name": "waar-site",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "Washington Aerial Robotics — team website",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^4.16.18",
+    "gsap": "^3.12.5",
+    "three": "^0.169.0"
+  },
+  "devDependencies": {
+    "@types/three": "^0.169.0"
+  }
+}

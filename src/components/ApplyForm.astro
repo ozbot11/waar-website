@@ -1,0 +1,317 @@
+---
+const webhook = import.meta.env.PUBLIC_APPLY_WEBHOOK ?? '';
+---
+<form class="apply" id="waar-apply" data-webhook={webhook} novalidate>
+  <fieldset class="block">
+    <legend class="mono k">About you</legend>
+    <label class="field">
+      <span>Name (first &amp; last) <i>*</i></span>
+      <input type="text" name="name" required autocomplete="name" />
+    </label>
+    <label class="field">
+      <span>UW email address <i>*</i></span>
+      <input type="email" name="uwEmail" required autocomplete="email" placeholder="netid@uw.edu" />
+    </label>
+    <fieldset class="choices">
+      <legend>Which best describes you? <i>*</i></legend>
+      <label class="opt"><input type="radio" name="memberStatus" value="returnee" required /> Returnee — member in good standing as of May 2026.</label>
+      <label class="opt"><input type="radio" name="memberStatus" value="former" /> Left or kicked — I left or was asked to leave prior to May 2026.</label>
+      <label class="opt"><input type="radio" name="memberStatus" value="new" /> New member — I have never been a member.</label>
+    </fieldset>
+  </fieldset>
+
+  <fieldset class="block path" data-path="returnee" hidden>
+    <legend class="mono k">Returnee form</legend>
+    <p class="hint">For members who had good standing in the WAAR RSO as of May 2026.</p>
+    <div class="row">
+      <label class="field"><span>Discord <em>optional</em></span><input type="text" name="discord" /></label>
+      <label class="field"><span>Phone number <em>optional</em></span><input type="tel" name="phone" /></label>
+    </div>
+    <label class="field"><span>GitHub account <em>optional</em></span><input type="text" name="github" /></label>
+    <fieldset class="choices">
+      <legend>Which subsystem were you on last year? <i>*</i></legend>
+      <label class="opt"><input type="radio" name="returneeSubsystem" value="Software" /> Software</label>
+      <label class="opt"><input type="radio" name="returneeSubsystem" value="Firmware" /> Firmware</label>
+      <label class="opt"><input type="radio" name="returneeSubsystem" value="Hardware" /> Hardware</label>
+    </fieldset>
+    <label class="field">
+      <span>What project were you a part of last year? <i>*</i></span>
+      <input type="text" name="returneeProject" placeholder="Vision, ESC design, structures, testbed…" />
+    </label>
+    <fieldset class="choices">
+      <legend>Do you want to be on the same or similar subsystem and project this year? <i>*</i></legend>
+      <label class="opt"><input type="radio" name="sameSubsystem" value="Yes" /> Yes</label>
+      <label class="opt"><input type="radio" name="sameSubsystem" value="No" /> No — I will message Francisco on Discord to discuss transitioning.</label>
+    </fieldset>
+    <fieldset class="choices">
+      <legend>Are you interested in any of the following leadership roles?</legend>
+      <label class="opt"><input type="checkbox" name="leadership" value="Assistant Technical Lead" /> Assistant Technical Lead — plan to stay through 2027–28; converts to technical lead.</label>
+      <label class="opt"><input type="checkbox" name="leadership" value="Subsystem Lead" /> Subsystem Lead — oversees a subsystem of 5–15 members; RSO officer.</label>
+      <label class="opt"><input type="checkbox" name="leadership" value="Project Lead" /> Project Lead — point of contact for one project; oversees 0–4 members.</label>
+    </fieldset>
+    <fieldset class="choices">
+      <legend>Can you attend the kick-off meeting on Tuesday, September 29 at 4:00pm? <i>*</i></legend>
+      <label class="opt"><input type="radio" name="kickoff" value="Yes" /> Yes</label>
+      <label class="opt"><input type="radio" name="kickoff" value="Virtually" /> Virtually</label>
+      <label class="opt"><input type="radio" name="kickoff" value="No" /> No</label>
+    </fieldset>
+    <fieldset class="choices">
+      <legend>The leads updated membership policies this year (a draft “bylaws” document). They will be discussed at kick-off on 9/29. Read them and be ready to comment or vote. <i>*</i></legend>
+      <label class="opt"><input type="checkbox" name="bylaws" value="yes" /> I will or have read a draft of the RSO bylaws.</label>
+    </fieldset>
+  </fieldset>
+
+  <div class="path" data-path="applicant" hidden>
+    <fieldset class="block">
+      <legend class="mono k">Application questionnaire 1</legend>
+      <div class="row">
+        <label class="field"><span>Major <i>*</i></span><input type="text" name="major" /></label>
+        <fieldset class="choices compact">
+          <legend>Year <i>*</i></legend>
+          <label class="opt"><input type="radio" name="year" value="Freshman" /> Freshman</label>
+          <label class="opt"><input type="radio" name="year" value="Sophomore" /> Sophomore</label>
+          <label class="opt"><input type="radio" name="year" value="Junior" /> Junior</label>
+          <label class="opt"><input type="radio" name="year" value="Senior" /> Senior</label>
+          <label class="opt other"><input type="radio" name="year" value="Other" /> Other <input type="text" name="yearOther" /></label>
+        </fieldset>
+      </div>
+      <label class="field">
+        <span>Resume / CV <em>PDF, max 10 MB</em></span>
+        <input type="file" name="resume" accept="application/pdf,.pdf" />
+      </label>
+      <fieldset class="choices">
+        <legend>Have you received any machine shop training?</legend>
+        <label class="opt"><input type="checkbox" name="shop" value="AA Machine Shop" /> AA Machine Shop</label>
+        <label class="opt"><input type="checkbox" name="shop" value="ME Machine Shop" /> ME Machine Shop</label>
+        <label class="opt other"><input type="checkbox" name="shop" value="Other" /> Other <input type="text" name="shopOther" /></label>
+      </fieldset>
+    </fieldset>
+
+    <fieldset class="block">
+      <legend class="mono k">Application questionnaire 2</legend>
+      <p class="hint">Short answers, about 2–4 sentences.</p>
+      <label class="field"><span>What motivates you to join WAAR? <i>*</i></span><textarea name="motivation" rows="4"></textarea></label>
+      <label class="field"><span>Experience with quadcopters, RC cars/planes, or robotics? <i>*</i></span><textarea name="roboticsExp" rows="4"></textarea></label>
+      <label class="field"><span>Experience with software / programming / coding? <i>*</i></span><textarea name="softwareExp" rows="4"></textarea></label>
+      <label class="field"><span>Any additional technical or STEM experience? <i>*</i></span><textarea name="stemExp" rows="4"></textarea></label>
+      <label class="field"><span>After learning about each subteam, which one best aligns with your skills and interests? <i>*</i></span><textarea name="subteamFit" rows="3"></textarea></label>
+      <label class="field"><span>Are you involved in any other RSOs or extracurriculars? <i>*</i></span><textarea name="otherRsos" rows="3"></textarea></label>
+      <label class="field"><span>How did you hear about WAAR? <i>*</i></span><textarea name="hearAbout" rows="2"></textarea></label>
+      <label class="field"><span>Anything else we should know? Questions?</span><textarea name="anythingElse" rows="3"></textarea></label>
+    </fieldset>
+
+    <fieldset class="block">
+      <legend class="mono k">Certification</legend>
+      <fieldset class="choices">
+        <legend>Active members commit about 4–7 hours per week and attend club meetings. Can you do that while balancing coursework? <i>*</i></legend>
+        <label class="opt"><input type="radio" name="hoursOk" value="Yes" /> Yes</label>
+        <label class="opt"><input type="radio" name="hoursOk" value="No" /> No</label>
+      </fieldset>
+      <fieldset class="choices">
+        <legend>I confirm that everything in this application is correct to the best of my knowledge. <i>*</i></legend>
+        <label class="opt"><input type="radio" name="certify" value="Yes" /> Yes</label>
+        <label class="opt"><input type="radio" name="certify" value="No" /> No</label>
+      </fieldset>
+    </fieldset>
+  </div>
+
+  <div class="path" data-path="actions" hidden>
+    <p class="status" id="apply-status" role="status" hidden></p>
+    <button class="btn primary" type="submit" id="apply-submit">Submit application</button>
+  </div>
+</form>
+
+<script>
+  const form = document.getElementById('waar-apply');
+  const statusEl = document.getElementById('apply-status');
+  const submitBtn = document.getElementById('apply-submit');
+  if (!form) throw new Error('apply form missing');
+
+  const webhook = form.dataset.webhook || '';
+  const paths = () => [...form.querySelectorAll('.path')];
+
+  const setRequired = (root, on) => {
+    root.querySelectorAll('input, textarea').forEach((el) => {
+      if (el.closest('.opt.other')) return;
+      const mark = el.closest('.field, .choices')?.querySelector('i');
+      if (mark || el.required) el.required = on && !!mark;
+    });
+    root.querySelectorAll('input[type="radio"][name], input[type="checkbox"][name="bylaws"]').forEach((el) => {
+      const starred = !!el.closest('.choices')?.querySelector('legend i');
+      if (starred && el.type === 'radio') el.required = on;
+      if (starred && el.name === 'bylaws') el.required = on;
+    });
+  };
+
+  const showPaths = (status, scroll = true) => {
+    paths().forEach((p) => {
+      const key = p.dataset.path;
+      const show =
+        (key === 'returnee' && status === 'returnee') ||
+        (key === 'applicant' && (status === 'new' || status === 'former')) ||
+        (key === 'actions' && !!status);
+      p.hidden = !show;
+      if (key !== 'actions') setRequired(p, show);
+    });
+    if (!scroll) return;
+    const next = form.querySelector('.path:not([hidden])');
+    next?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  form.querySelectorAll('input[name="memberStatus"]').forEach((el) => {
+    el.addEventListener('change', () => showPaths(el.value));
+  });
+
+  const already = form.querySelector('input[name="memberStatus"]:checked');
+  if (already) showPaths(already.value, false);
+
+  const checked = (name) =>
+    [...form.querySelectorAll(`input[name="${name}"]:checked`)].map((el) => el.value);
+
+  const val = (name) => {
+    const el = form.elements.namedItem(name);
+    if (el instanceof RadioNodeList) {
+      const picked = [...el].find((n) => n instanceof HTMLInputElement && n.checked);
+      return picked?.value ?? '';
+    }
+    return el && 'value' in el ? String(el.value).trim() : '';
+  };
+
+  const fileToPayload = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onerror = () => reject(new Error('Could not read resume'));
+      reader.onload = () => {
+        const result = String(reader.result || '');
+        const base64 = result.split(',')[1] || '';
+        resolve({ name: file.name, type: file.type || 'application/pdf', base64 });
+      };
+      reader.readAsDataURL(file);
+    });
+
+  const setStatus = (msg, kind) => {
+    if (!statusEl) return;
+    statusEl.hidden = false;
+    statusEl.textContent = msg;
+    statusEl.dataset.kind = kind;
+  };
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const status = val('memberStatus');
+    if (!status) {
+      setStatus('Please choose returnee, left/kicked, or new member.', 'err');
+      return;
+    }
+    if (!form.reportValidity()) {
+      setStatus('Please fill in the required fields.', 'err');
+      return;
+    }
+
+    const resumeInput = form.elements.namedItem('resume');
+    const file = resumeInput?.files?.[0];
+    if (file && file.size > 10 * 1024 * 1024) {
+      setStatus('Resume must be a PDF under 10 MB.', 'err');
+      return;
+    }
+
+    if (!webhook) {
+      setStatus('The Google inbox is not connected yet. Email washingtonaerialrobotics@gmail.com for now.', 'err');
+      return;
+    }
+    if (!/script\.google\.com\/macros\/s\/.+\/exec/.test(webhook)) {
+      setStatus('The webhook must be the Deploy /exec URL, not the googleusercontent page from the address bar.', 'err');
+      return;
+    }
+
+    if (submitBtn) submitBtn.disabled = true;
+    setStatus('Sending…', 'wait');
+
+    try {
+      const resume = file ? await fileToPayload(file) : null;
+      const payload = {
+        submittedAt: new Date().toISOString(),
+        name: val('name'),
+        uwEmail: val('uwEmail'),
+        memberStatus: status,
+        discord: val('discord'),
+        phone: val('phone'),
+        github: val('github'),
+        returneeSubsystem: val('returneeSubsystem'),
+        returneeProject: val('returneeProject'),
+        sameSubsystem: val('sameSubsystem'),
+        leadership: checked('leadership').join('; '),
+        kickoff: val('kickoff'),
+        bylaws: val('bylaws'),
+        major: val('major'),
+        year: val('year') === 'Other' ? `Other: ${val('yearOther')}` : val('year'),
+        shop: [...checked('shop').filter((v) => v !== 'Other'), val('shopOther')].filter(Boolean).join('; '),
+        motivation: val('motivation'),
+        roboticsExp: val('roboticsExp'),
+        softwareExp: val('softwareExp'),
+        stemExp: val('stemExp'),
+        subteamFit: val('subteamFit'),
+        otherRsos: val('otherRsos'),
+        hearAbout: val('hearAbout'),
+        anythingElse: val('anythingElse'),
+        hoursOk: val('hoursOk'),
+        certify: val('certify'),
+      };
+      if (resume) payload.resumeNote = resume.name;
+
+      const base = webhook.replace(/\?.*$/, '');
+      const url = base + '?payload=' + encodeURIComponent(JSON.stringify(payload));
+      await new Promise((resolve) => {
+        const s = document.createElement('script');
+        s.src = url;
+        s.onload = s.onerror = () => {
+          s.remove();
+          resolve();
+        };
+        document.head.appendChild(s);
+        setTimeout(resolve, 4000);
+      });
+
+      form.reset();
+      showPaths('', false);
+      setStatus('Application sent. We will follow up at your UW email.', 'ok');
+    } catch {
+      setStatus('Could not send. Email washingtonaerialrobotics@gmail.com.', 'err');
+    } finally {
+      if (submitBtn) submitBtn.disabled = false;
+    }
+  });
+</script>
+
+<style>
+  .apply{margin-top:36px;display:grid;gap:22px;max-width:820px}
+  .apply [hidden]{display:none!important}
+  .path[data-path="applicant"]{display:grid;gap:22px}
+  .path[data-path="actions"]{display:grid;gap:16px;justify-items:start}
+  .block{margin:0;padding:clamp(22px,3vw,34px);border:1px solid var(--line-soft);background:var(--bg-2);
+    display:grid;gap:20px}
+  .block > legend.k,.k{font-size:11px;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;padding:0 8px}
+  .hint{color:var(--muted);font-size:14px;line-height:1.55;margin:-4px 0 0}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .field{display:grid;gap:8px;font-size:14.5px;color:#C6BFD8}
+  .field em{color:var(--muted);font-style:normal;font-size:12px}
+  .field i,.choices i{color:var(--gold);font-style:normal}
+  input[type="text"],input[type="email"],input[type="tel"],textarea,input[type="file"]{
+    width:100%;background:#0A0713;border:1px solid var(--line-soft);color:var(--text);
+    font:inherit;padding:12px 14px;border-radius:2px}
+  textarea{resize:vertical;min-height:96px}
+  input:focus,textarea:focus{outline:none;border-color:var(--purple);box-shadow:0 0 0 1px var(--purple)}
+  input[type="file"]{padding:10px}
+  .choices{border:0;margin:0;padding:0;display:grid;gap:10px}
+  .choices legend{color:#C6BFD8;font-size:14.5px;margin-bottom:4px}
+  .opt{display:flex;align-items:flex-start;gap:10px;color:var(--text);font-size:14.5px;line-height:1.45;cursor:pointer}
+  .opt input{margin-top:4px;accent-color:var(--purple)}
+  .opt.other{flex-wrap:wrap}
+  .opt.other input[type="text"]{flex:1;min-width:180px}
+  .status{font-size:14.5px}
+  .status[data-kind="ok"]{color:var(--gold)}
+  .status[data-kind="err"]{color:#ff8f8f}
+  .status[data-kind="wait"]{color:var(--muted)}
+  .apply .btn{justify-self:start}
+  @media (max-width:700px){.row{grid-template-columns:1fr}}
+</style>

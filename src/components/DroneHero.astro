@@ -1,0 +1,198 @@
+---
+// Home-page hero: persistent 3D drone scene + telemetry HUD overlay.
+---
+<div class="hero-scene">
+  <canvas id="hero-canvas"></canvas>
+  <div class="vignette"></div>
+
+  <!-- avionics HUD -->
+  <div class="hud" aria-hidden="true">
+    <div class="bracket tl"></div><div class="bracket tr"></div>
+    <div class="bracket bl"></div><div class="bracket br"></div>
+
+    <div class="hud-top">
+      <span>WAAR-01 · FLIGHT TELEMETRY</span>
+      <span class="live"><i class="dot"></i> AUTONOMOUS · ARMED</span>
+    </div>
+
+    <div class="readouts">
+      <div class="ro"><span class="k">ALT</span><span class="v" data-ro="alt">12.4</span><span class="u">m</span></div>
+      <div class="ro"><span class="k">VEL</span><span class="v" data-ro="vel">3.18</span><span class="u">m/s</span></div>
+      <div class="ro"><span class="k">PWR</span><span class="v" data-ro="pwr">82</span><span class="u">%</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- hero copy -->
+<header class="hero">
+  <div class="hero-copy">
+    <p class="eyebrow anim">University of Washington · Autonomous Systems</p>
+    <h1 class="display">
+      <span class="line">Washington</span>
+      <span class="line accent">Aerial</span>
+      <span class="line out">Robotics</span>
+    </h1>
+    <p class="tag anim"><b>We build drones that fly themselves.</b> A student team engineering fully autonomous UAVs for the International Aerial Robotics Competition.</p>
+    <div class="cta anim">
+      <a class="btn primary" href="/join">Join the team</a>
+      <a class="btn" href="/drones">See the drones</a>
+    </div>
+  </div>
+  <div class="scrollcue anim"><span class="mono">Scroll</span><div class="rail"><i class="bead"></i></div></div>
+</header>
+
+<style>
+  .hero-scene{position:fixed;inset:0;z-index:0}
+  #hero-canvas{display:block;width:100%;height:100%}
+  .vignette{position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(120% 90% at 50% 42%,transparent 42%,rgba(6,4,12,.6) 100%)}
+
+  /* HUD */
+  .hud{position:fixed;inset:0;z-index:3;pointer-events:none;
+    font-family:"IBM Plex Mono",monospace;color:var(--purple);font-size:11px;letter-spacing:.14em}
+  .bracket{position:absolute;width:26px;height:26px;border:1.5px solid var(--purple);opacity:.55}
+  .bracket.tl{top:26px;left:26px;border-right:0;border-bottom:0}
+  .bracket.tr{top:26px;right:26px;border-left:0;border-bottom:0}
+  .bracket.bl{bottom:26px;left:26px;border-right:0;border-top:0}
+  .bracket.br{bottom:26px;right:26px;border-left:0;border-top:0}
+  .hud-top{position:absolute;top:24px;left:64px;right:64px;display:flex;justify-content:space-between;opacity:.85}
+  .live{display:flex;align-items:center;gap:7px;color:var(--gold)}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px var(--gold);animation:blink 1.6s infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+  .readouts{position:absolute;right:60px;bottom:64px;display:grid;gap:14px;justify-items:end}
+  .ro{display:flex;align-items:baseline;gap:10px}
+  .ro .k{color:var(--muted);width:38px}
+  .ro .v{color:var(--purple);font-size:15px;font-weight:600;min-width:74px;text-shadow:0 0 12px rgba(157,123,255,.4)}
+  .ro .u{color:var(--purple-dim);font-size:10px}
+
+  /* hero copy */
+  .hero{position:relative;z-index:4;height:100vh;display:flex;flex-direction:column;
+    justify-content:center;padding:72px var(--pad) 0;pointer-events:none}
+  .hero-copy{max-width:min(100%,20ch)}
+  .tag,.cta,.eyebrow{max-width:none}
+  .hero-copy .eyebrow{white-space:nowrap;width:max-content}
+  h1.display{font-weight:700;font-size:clamp(44px,10.5vw,150px);margin-top:22px;line-height:.82}
+  h1 .line{display:block;line-height:.82}
+  h1 .accent{color:var(--purple);text-shadow:0 0 40px rgba(157,123,255,.35)}
+  h1 .out{color:transparent;-webkit-text-stroke:1.5px rgba(236,232,246,.5)}
+  .tag{margin-top:30px;max-width:44ch;font-size:clamp(15px,1.5vw,18px);line-height:1.55;color:#C6BFD8}
+  .tag b{color:var(--text);font-weight:600}
+  .cta{margin-top:38px;display:flex;gap:14px;flex-wrap:wrap;pointer-events:auto}
+  .scrollcue{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);
+    font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);
+    display:flex;flex-direction:column;align-items:center;gap:10px}
+  .scrollcue .rail{position:relative;width:1px;height:38px;background:linear-gradient(var(--purple),transparent)}
+  .scrollcue .bead{position:absolute;top:0;left:-1.5px;width:4px;height:4px;border-radius:50%;
+    background:var(--purple);box-shadow:0 0 8px var(--purple);animation:fall 2s infinite}
+  @keyframes fall{0%{transform:translateY(-16px);opacity:0}30%{opacity:1}100%{transform:translateY(38px);opacity:0}}
+
+  @media (max-width:960px),(max-height:680px){
+    .readouts{display:none}
+  }
+  @media (max-width:720px){
+    .readouts{display:none}
+    .hud-top{left:56px;right:56px;font-size:10px}
+    h1.display{font-size:clamp(42px,14vw,84px)}
+    .hero-copy .eyebrow{white-space:normal}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .dot,.bead{animation:none}
+  }
+</style>
+
+<script>
+  import * as THREE from 'three';
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import { loadDrone, addStudioLights } from '../lib/drone';
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canvas = document.getElementById('hero-canvas') as HTMLCanvasElement | null;
+
+  if (canvas) {
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, logarithmicDepthBuffer: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.35;
+
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x0a0713, 0.028);
+    const camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.1, 100);
+    camera.position.set(0, 1.6, 9);
+
+    addStudioLights(scene);
+
+    const grid = new THREE.GridHelper(60, 60, 0x9d7bff, 0x2a2140);
+    (grid.material as THREE.Material).transparent = true;
+    (grid.material as THREE.Material).opacity = 0.3;
+    grid.position.y = -2.2; scene.add(grid);
+
+    let drone: THREE.Group | null = null;
+    let scrollP = 0;
+    const onScroll = () => { scrollP = Math.min(Math.max(window.scrollY / window.innerHeight, 0), 1); };
+    window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+    const t0 = performance.now();
+    const tick = (now: number) => {
+      const t = (now - t0) / 1000;
+      if (drone) {
+        const bob = reduce ? 0 : Math.sin(t * 1.3) * 0.12;
+        drone.position.y = 0.35 + bob - scrollP * 1.4;
+        drone.rotation.y = (reduce ? 0.5 : t * 0.28) + scrollP * 1.4;
+        drone.rotation.z = reduce ? 0 : Math.sin(t * 0.9) * 0.04;
+        drone.rotation.x = 0.06 + scrollP * 0.25;
+      }
+      camera.position.z = 9 - scrollP * 2.2;
+      camera.position.y = 1.6 + scrollP * 0.6;
+      camera.lookAt(0, 0.4 - scrollP * 0.6, 0);
+      renderer.render(scene, camera);
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+
+    loadDrone().then(({ group }) => {
+      drone = group;
+      drone.scale.set(0.001, 0.001, 0.001);
+      scene.add(drone);
+      if (reduce) drone.scale.set(1.05, 1.05, 1.05);
+      else gsap.to(drone.scale, { x: 1.05, y: 1.05, z: 1.05, duration: 1.4, ease: 'power3.out', delay: 0.15 });
+    }).catch((err) => console.error('Failed to load airframe', err));
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  }
+
+  /* ---- live HUD data ---- */
+  const rand = (b: number, a: number, d: number) => (b + (Math.random() - 0.5) * a).toFixed(d);
+  const set = (sel: string, val: string) => document.querySelectorAll(`[data-ro="${sel}"]`).forEach((e) => (e.textContent = val));
+  setInterval(() => {
+    set('alt', rand(12.4, 0.8, 1));
+    set('vel', rand(3.18, 0.6, 2));
+    set('pwr', String(Math.round(+rand(82, 2, 0))));
+  }, 900);
+
+  /* ---- GSAP reveals + scroll fade ---- */
+  if (!reduce) {
+    gsap.registerPlugin(ScrollTrigger);
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    tl.from('.eyebrow.anim', { y: 16, opacity: 0, duration: 0.7, delay: 0.2 })
+      .from('h1 .line', { y: 40, opacity: 0, duration: 0.85, stagger: 0.12 }, '-=0.3')
+      .from('.tag.anim', { y: 20, opacity: 0, duration: 0.7 }, '-=0.4')
+      .from('.cta.anim .btn', { y: 16, opacity: 0, duration: 0.6, stagger: 0.1 }, '-=0.4')
+      .from('.hud .bracket', { opacity: 0, duration: 0.6, stagger: 0.08 }, '-=1.1')
+      .from('.hud-top,.readouts', { opacity: 0, duration: 0.8, stagger: 0.08 }, '-=0.9');
+
+    gsap.to('.hero-copy', {
+      opacity: 0, y: -40, ease: 'none',
+      scrollTrigger: { trigger: '.after-hero', start: 'top bottom', end: 'top center', scrub: true },
+    });
+    gsap.to('.scrollcue', {
+      opacity: 0, ease: 'none',
+      scrollTrigger: { trigger: '.after-hero', start: 'top bottom', end: 'top 80%', scrub: true },
+    });
+  }
+</script>

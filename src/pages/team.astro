@@ -1,0 +1,146 @@
+---
+import Base from '../layouts/Base.astro';
+import MemberCard from '../components/MemberCard.astro';
+import { team } from '../data/team';
+import { technicalLead, deputies, subsystemLeads } from '../data/org';
+
+const leads = team.filter((m) => m.group === 'Leadership');
+const advisors = team.filter((m) => m.group === 'Advisors');
+const orgPeople = [technicalLead, ...deputies, ...subsystemLeads];
+const orgLines = (name: string) =>
+  orgPeople.find((p) => name.startsWith(p.name.split(' ')[0]) || p.name.startsWith(name.split(' ')[0]))?.areas ?? [];
+---
+<Base title="Team · Washington Aerial Robotics">
+  <section class="page-head">
+    <div class="container">
+      <p class="eyebrow reveal">Who we are</p>
+      <h1 class="reveal" data-delay="1">The <span class="accent">team</span></h1>
+      <p class="lead reveal" data-delay="2" style="margin-top:24px">
+        The students who lead our subteams, and the faculty who advise them.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="group-head reveal">
+        <span class="mono num">01</span><h2>Leadership</h2>
+      </div>
+      <div class="roster">
+        {leads.map((m, i) => (
+          <MemberCard
+            name={m.name}
+            role={m.role}
+            photo={m.photo}
+            lines={orgLines(m.name)}
+            delay={String(Math.min(i, 3))}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section org-sec">
+    <div class="container">
+      <div class="group-head reveal">
+        <span class="mono num">02</span><h2>Organization</h2>
+      </div>
+
+      <div class="org">
+        <div class="org-top">
+          <MemberCard
+            class="org-cisco"
+            name={technicalLead.name}
+            role={technicalLead.title}
+            photo={technicalLead.photo}
+            initials={technicalLead.initials}
+            lines={technicalLead.areas}
+          />
+
+          <div class="org-spine" aria-hidden="true"></div>
+
+          <div class="org-deputies">
+            {deputies.map((m, i) => (
+              <MemberCard
+                name={m.name}
+                role={m.title}
+                photo={m.photo}
+                initials={m.initials}
+                lines={m.areas}
+                delay={String(i + 1)}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div class="org-spine" aria-hidden="true"></div>
+
+        <div class="org-subs">
+          {subsystemLeads.map((m, i) => (
+            <MemberCard
+              name={m.name}
+              role={m.title}
+              photo={m.photo}
+              initials={m.initials}
+              lines={m.areas}
+              delay={String(Math.min(i, 3))}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section advisors-sec">
+    <div class="container">
+      <div class="group-head reveal">
+        <span class="mono num">03</span><h2>Faculty Advisors</h2>
+      </div>
+      <div class="roster advisors">
+        {advisors.map((m, i) => (
+          <MemberCard
+            name={m.name}
+            role={m.role}
+            photo={m.photo}
+            lines={m.detail ? [m.detail] : []}
+            delay={String(i)}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section join-cta">
+    <div class="container reveal">
+      <h2>Want your name here?</h2>
+      <a class="btn gold" href="/join" style="margin-top:24px">Join the team →</a>
+    </div>
+  </section>
+</Base>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.flip').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const open = btn.classList.toggle('is-flipped');
+      btn.setAttribute('aria-expanded', String(open));
+    });
+  });
+</script>
+
+<style>
+  .group-head{display:flex;align-items:baseline;gap:16px;margin-bottom:38px;
+    border-bottom:1px solid var(--line-soft);padding-bottom:18px}
+  .group-head .num{color:var(--gold);font-size:13px;letter-spacing:.2em}
+
+  .roster{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(20px,3vw,34px)}
+  .advisors{max-width:660px;margin-inline:auto}
+
+  .org,.org-top{display:flex;flex-direction:column;align-items:center}
+  :global(.org-cisco){width:min(100%,280px);flex:0 0 auto}
+  .org-spine{width:1px;height:28px;background:var(--line);margin:8px 0}
+  .org-deputies{display:grid;grid-template-columns:repeat(2,minmax(0,280px));justify-content:center;
+    gap:clamp(20px,3vw,34px);width:100%}
+  .org-deputies :global(.member){width:100%;min-width:0}
+  .org-subs{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(20px,3vw,34px);width:100%}
+  .org-subs :global(.member){width:min(100%,200px);flex:0 0 auto}
+</style>

@@ -1,0 +1,99 @@
+---
+import Base from '../layouts/Base.astro';
+import ApplyForm from '../components/ApplyForm.astro';
+
+const steps = [
+  { n: '01', t: 'Apply', d: 'Fill out the membership application on this page. Choose returnee, left/kicked, or new member — the next section appears after you pick.' },
+  { n: '02', t: 'Pick a direction', d: 'Tell us whether you lean Hardware or Software — or that you\u2019re not sure yet. We\u2019ll help you find where you fit.' },
+  { n: '03', t: 'Build', d: 'Get hands-on right away: real drones, real subsystems, real competition deadlines.' },
+];
+---
+<Base title="Join · Washington Aerial Robotics">
+  <section class="page-head">
+    <div class="container">
+      <p class="eyebrow gold reveal">Join the team</p>
+      <h1 class="reveal" data-delay="1">All standings.<br>All majors. <span class="accent">All welcome.</span></h1>
+      <p class="lead reveal" data-delay="2" style="margin-top:26px">
+        You don't need to have built a drone before — you need to want to. We take members from every
+        academic standing and every major, and we recruit each semester.
+      </p>
+      <div class="reveal" data-delay="3" style="margin-top:36px">
+        <a class="btn primary" href="#apply">Apply now →</a>
+        <a class="btn" href="mailto:washingtonaerialrobotics@gmail.com" style="margin-left:10px">Email us</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section subteams">
+    <div class="container">
+      <p class="eyebrow reveal">Where you could work</p>
+      <div class="grid grid-2" style="margin-top:34px">
+        <div class="cell reveal">
+          <div class="num">SUBTEAM 01 · HARDWARE</div>
+          <h3 style="margin:14px 0 16px">Build the aircraft</h3>
+          <p class="p">CAD design, drone avionics, prototyping, manufacturing, PCB design, and embedded electronics.</p>
+          <div class="chips"><span class="chip">CAD</span><span class="chip">AVIONICS</span><span class="chip">PCB</span><span class="chip">EMBEDDED</span></div>
+        </div>
+        <div class="cell reveal" data-delay="1">
+          <div class="num">SUBTEAM 02 · SOFTWARE</div>
+          <h3 style="margin:14px 0 16px">Make it autonomous</h3>
+          <p class="p">ROS (C++ / Python), PX4 / Bitcraze, computer vision, path planning, and SLAM.</p>
+          <div class="chips"><span class="chip">ROS</span><span class="chip">PX4</span><span class="chip">VISION</span><span class="chip">SLAM</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow reveal">How it works</p>
+      <div class="steps" style="margin-top:34px">
+        {steps.map((s, i) => (
+          <div class="step reveal" data-delay={String(i)}>
+            <div class="sn display">{s.n}</div>
+            <h3>{s.t}</h3>
+            <p class="p">{s.d}</p>
+          </div>
+        ))}
+      </div>
+      <p class="foot-note reveal">
+        Questions? Reach us at
+        <a href="mailto:washingtonaerialrobotics@gmail.com">washingtonaerialrobotics@gmail.com</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section apply-sec" id="apply">
+    <div class="container">
+      <p class="eyebrow gold reveal">Application</p>
+      <h2 class="reveal" data-delay="1">Membership form</h2>
+      <p class="lead reveal" data-delay="2" style="margin-top:18px;max-width:64ch">
+        Washington Aerial Robotics was founded in Spring 2025 to give students a place to build autonomous
+        drones and develop real design skills — with IARC as the goal. Use your UW email.
+      </p>
+      <div class="about-app reveal">
+        <p>Three technical subteams: <strong>Hardware</strong> (CAD, structures, prototyping, manufacturing, power integration),
+          <strong>Avionics &amp; Firmware</strong> (PCBs, embedded, flight-controller and ESC firmware in C++ / KiCad),
+          and <strong>Autonomy &amp; Software</strong> (ROS, PX4 / Bitcraze, vision, planning, SLAM on a Linux flight computer).</p>
+        <p>Expect a 1-hour all-team meeting every other week, a 1-hour subteam meeting each week, ownership of your tasks, and proactive communication.</p>
+      </div>
+      <ApplyForm />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .subteams{background:linear-gradient(180deg,var(--bg) 0%,#0E0A18 100%);border-block:1px solid var(--line-soft)}
+  .p{font-size:14.5px;line-height:1.6;color:var(--muted);max-width:44ch}
+  .chips{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line-soft)}
+  .step{background:var(--bg-2);padding:clamp(26px,3vw,40px)}
+  .sn{font-size:40px;color:var(--purple);opacity:.5;margin-bottom:12px}
+  .step h3{margin-bottom:12px}
+  .foot-note{margin-top:50px;color:var(--muted);font-size:15px}
+  .foot-note a{color:var(--gold)}
+  .apply-sec{padding-top:0}
+  .about-app{margin-top:22px;max-width:68ch;color:var(--muted);font-size:15px;line-height:1.65;display:grid;gap:14px}
+  .about-app strong{color:var(--text);font-weight:600}
+  @media (max-width:820px){.steps{grid-template-columns:1fr}}
+</style>

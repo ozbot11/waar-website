@@ -1,0 +1,86 @@
+---
+import Base from '../layouts/Base.astro';
+import DroneHero from '../components/DroneHero.astro';
+---
+<Base>
+  <DroneHero />
+
+  <!-- content slides up over the persistent 3D scene -->
+  <section class="after-hero">
+    <div class="container">
+      <p class="eyebrow gold reveal">The Mission</p>
+      <h2 class="reveal" data-delay="1">Design it. Build it. <em>Let it fly on its own.</em></h2>
+      <p class="lead reveal" data-delay="2" style="margin-top:26px">
+        Washington Aerial Robotics is a team of students and faculty at the University of Washington,
+        Seattle, working together to build autonomous drones. Our purpose is to give the UW engineering
+        community opportunities to learn skills in designing, building, and testing autonomous UAVs — and
+        to compete in the International Aerial Robotics Competition. Two subteams make it happen.
+      </p>
+
+      <div class="grid grid-2" style="margin-top:70px">
+        <div class="cell reveal">
+          <div class="num">SUBTEAM 01</div>
+          <h3 style="margin:14px 0 16px">Hardware</h3>
+          <p class="cell-p">The airframe and everything that keeps it alive: CAD design, drone avionics,
+            prototyping and manufacturing, PCB design, and embedded electronics.</p>
+          <div class="chips">
+            <span class="chip">CAD</span><span class="chip">AVIONICS</span>
+            <span class="chip">PCB DESIGN</span><span class="chip">EMBEDDED</span>
+          </div>
+        </div>
+        <div class="cell reveal" data-delay="1">
+          <div class="num">SUBTEAM 02</div>
+          <h3 style="margin:14px 0 16px">Software</h3>
+          <p class="cell-p">The intelligence in the air: ROS in C++ and Python, PX4 / Bitcraze flight stacks,
+            computer vision, path planning, and SLAM for autonomous navigation.</p>
+          <div class="chips">
+            <span class="chip">ROS</span><span class="chip">PX4</span>
+            <span class="chip">COMPUTER VISION</span><span class="chip">SLAM</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-row reveal">
+        <div class="big display">All standings.<br>All majors. <span>All welcome.</span></div>
+        <a class="btn primary" href="/join">Apply this semester →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- sponsors -->
+  <section class="sponsors">
+    <div class="container">
+      <p class="sponsors-label mono reveal">Club Sponsors</p>
+      <p class="sponsors-sub reveal" data-delay="1">The design, simulation, and analysis tools behind our aircraft.</p>
+      <div class="logo-row reveal" data-delay="1">
+        <div class="logo-card"><img src="/sponsors/solidworks.png" alt="SolidWorks" loading="lazy" /></div>
+        <div class="logo-card"><img src="/sponsors/ansys.png" alt="Ansys" loading="lazy" /></div>
+        <div class="logo-card"><img src="/sponsors/simscale.png" alt="SimScale" loading="lazy" /></div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .after-hero{position:relative;z-index:4;
+    background:linear-gradient(180deg,rgba(10,7,19,0) 0%,rgba(10,7,19,.72) 14%,rgba(12,9,22,.95) 40%,var(--bg) 100%);
+    padding:26vh 0 16vh}
+  .cell-p{font-size:14.5px;line-height:1.6;color:var(--muted);max-width:42ch}
+  .chips{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px}
+  .cta-row{margin-top:80px;display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;
+    border-top:1px solid var(--line-soft);padding-top:34px}
+  .cta-row .big{font-size:clamp(26px,3.6vw,44px);line-height:1}
+  .cta-row .big span{color:var(--purple)}
+
+  /* sponsors */
+  .sponsors{position:relative;z-index:4;background:var(--bg);padding:0 0 clamp(70px,12vh,130px);text-align:center}
+  .sponsors-label{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+  .sponsors-sub{color:var(--muted);font-size:15px;margin-top:14px}
+  .logo-row{margin:46px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:860px}
+  .logo-card{background:#fafafc;border:1px solid var(--line-soft);border-radius:14px;
+    min-height:132px;display:flex;align-items:center;justify-content:center;padding:32px 26px;
+    transition:transform .25s ease,box-shadow .25s ease}
+  .logo-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.35)}
+  .logo-card img{max-height:60px;width:auto;max-width:100%;object-fit:contain}
+  @media (max-width:640px){.logo-row{grid-template-columns:1fr;max-width:320px}}
+</style>

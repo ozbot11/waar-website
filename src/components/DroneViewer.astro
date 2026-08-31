@@ -1,0 +1,82 @@
+---
+// Interactive, drag-to-orbit drone viewer (bounded, not full-screen).
+---
+<div class="viewer">
+  <canvas id="viewer-canvas"></canvas>
+  <div class="viewer-hud mono">
+    <span>WAAR-01 · COMPETITION AIRFRAME</span>
+    <span class="hint">Drag to orbit · scroll to zoom</span>
+  </div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+</div>
+
+<style>
+  .viewer{position:relative;aspect-ratio:16/10;width:100%;
+    background:radial-gradient(120% 120% at 50% 30%,#160F26 0%,#0A0713 70%);
+    border:1px solid var(--line-soft);overflow:hidden}
+  #viewer-canvas{display:block;width:100%;height:100%;cursor:grab}
+  #viewer-canvas:active{cursor:grabbing}
+  .viewer-hud{position:absolute;top:16px;left:18px;right:18px;display:flex;justify-content:space-between;
+    font-size:10.5px;letter-spacing:.14em;color:var(--purple);text-transform:uppercase;pointer-events:none}
+  .viewer-hud .hint{color:var(--muted)}
+  .corner{position:absolute;width:18px;height:18px;border:1.5px solid var(--purple);opacity:.4;pointer-events:none}
+  .corner.tl{top:12px;left:12px;border-right:0;border-bottom:0}
+  .corner.tr{top:12px;right:12px;border-left:0;border-bottom:0}
+  .corner.bl{bottom:12px;left:12px;border-right:0;border-top:0}
+  .corner.br{bottom:12px;right:12px;border-left:0;border-top:0}
+  @media (max-width:600px){.viewer-hud .hint{display:none}}
+</style>
+
+<script>
+  import * as THREE from 'three';
+  import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+  import { loadDrone, addStudioLights } from '../lib/drone';
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canvas = document.getElementById('viewer-canvas') as HTMLCanvasElement | null;
+
+  if (canvas) {
+    const parent = canvas.parentElement as HTMLElement;
+    const size = () => ({ w: parent.clientWidth, h: parent.clientHeight });
+
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, logarithmicDepthBuffer: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(size().w, size().h);
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.35;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(40, size().w / size().h, 0.1, 100);
+    camera.position.set(3.5, 2, 5.5);
+
+    addStudioLights(scene);
+
+    const controls = new OrbitControls(camera, canvas);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.08;
+    controls.minDistance = 3.5;
+    controls.maxDistance = 11;
+    controls.enablePan = false;
+    controls.autoRotate = !reduce;
+    controls.autoRotateSpeed = 0.9;
+    controls.target.set(0, 0.1, 0);
+
+    const tick = () => {
+      controls.update();
+      renderer.render(scene, camera);
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+
+    loadDrone().then(({ group }) => {
+      scene.add(group);
+    }).catch((err) => console.error('Failed to load airframe', err));
+
+    window.addEventListener('resize', () => {
+      const { w, h } = size();
+      camera.aspect = w / h; camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    });
+  }
+</script>

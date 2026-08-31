@@ -1,0 +1,77 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('updates', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const fmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+---
+<Base title="Updates · Washington Aerial Robotics">
+  <section class="page-head">
+    <div class="container">
+      <p class="eyebrow reveal">News &amp; build logs</p>
+      <h1 class="reveal" data-delay="1"><span class="accent">Updates</span></h1>
+      <p class="lead reveal" data-delay="2" style="margin-top:24px">
+        For the latest news on our club, check out our socials:
+      </p>
+      <div class="socials reveal" data-delay="3">
+        <a class="social" href="https://www.instagram.com/uw_waar/" target="_blank" rel="noopener">
+          Instagram · @uw_waar
+        </a>
+        <a class="social" href="https://www.linkedin.com/company/washington-aerial-robotics/" target="_blank" rel="noopener">
+          LinkedIn · Washington Aerial Robotics
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="feed">
+        {posts.map((p, i) => (
+          <a class="post reveal" data-delay={String(Math.min(i, 3))} href={`/updates/${p.slug}`}>
+            {p.data.hero && (
+              <div class="thumb">
+                <img src={p.data.hero} alt={p.data.heroAlt || p.data.title} loading="lazy" />
+              </div>
+            )}
+            <div class="post-body">
+              <div class="meta">
+                <span class="tag mono">{p.data.tag}</span>
+                <time class="mono">{fmt(p.data.date)}</time>
+              </div>
+              <h3>{p.data.title}</h3>
+              <p class="summary">{p.data.summary}</p>
+              <span class="read mono">Read →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .socials{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+  .social{font-family:"IBM Plex Mono",monospace;font-size:12.5px;letter-spacing:.06em;
+    color:var(--text);text-decoration:none;border:1px solid var(--line-soft);
+    padding:11px 18px;border-radius:999px;background:rgba(18,12,31,.5);transition:.25s}
+  .social:hover{border-color:var(--gold);color:var(--gold);box-shadow:0 6px 22px rgba(216,180,90,.14)}
+
+  .feed{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(20px,3vw,32px)}
+  .post{background:var(--bg-2);border:1px solid var(--line-soft);border-radius:14px;overflow:hidden;
+    text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:transform .28s,border-color .28s,box-shadow .28s}
+  .post:hover{transform:translateY(-4px);border-color:var(--purple);box-shadow:0 20px 50px rgba(0,0,0,.45)}
+  .thumb{aspect-ratio:3/2;overflow:hidden;background:#0f0a1a}
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+  .post:hover .thumb img{transform:scale(1.05)}
+  .post-body{padding:clamp(22px,2.6vw,30px)}
+  .meta{display:flex;align-items:center;gap:16px;margin-bottom:14px}
+  .meta .tag{font-size:10.5px;letter-spacing:.16em;color:var(--gold);text-transform:uppercase}
+  .meta time{font-size:11px;color:var(--muted);letter-spacing:.08em}
+  .post h3{font-size:clamp(19px,2.2vw,25px)}
+  .summary{color:var(--muted);font-size:14.5px;line-height:1.6;margin-top:12px}
+  .read{display:inline-block;margin-top:18px;font-size:12px;letter-spacing:.14em;color:var(--purple);text-transform:uppercase}
+  @media (max-width:720px){.feed{grid-template-columns:1fr}}
+</style>
