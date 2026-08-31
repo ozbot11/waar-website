@@ -35,8 +35,8 @@ export const deputies: OrgPerson[] = [
   },
   {
     title: 'Technical Assistant Lead',
-    name: 'Erim',
-    initials: 'ER',
+    name: 'Erim Evren',
+    initials: 'EE',
     areas: [
       'Supports the technical lead',
       'Cross-subsystem coordination',
