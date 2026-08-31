@@ -1,9 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
-import ApplyForm from '../components/ApplyForm.astro';
+
+const formId = '1FAIpQLScy95ffgJaS-AltVsN8AunVKHzRH8mh8MMqOx3DijgJ185icQ';
+const formEmbed = `https://docs.google.com/forms/d/e/${formId}/viewform?embedded=true`;
+const formOpen = `https://docs.google.com/forms/d/e/${formId}/viewform`;
 
 const steps = [
-  { n: '01', t: 'Apply', d: 'Fill out the membership application on this page. Choose returnee, left/kicked, or new member — the next section appears after you pick.' },
+  { n: '01', t: 'Apply', d: 'Fill out the membership application on this page. Returning members and new applicants take different paths — the form will route you.' },
   { n: '02', t: 'Pick a direction', d: 'Tell us whether you lean Hardware or Software — or that you\u2019re not sure yet. We\u2019ll help you find where you fit.' },
   { n: '03', t: 'Build', d: 'Get hands-on right away: real drones, real subsystems, real competition deadlines.' },
 ];
@@ -77,7 +80,16 @@ const steps = [
           and <strong>Autonomy &amp; Software</strong> (ROS, PX4 / Bitcraze, vision, planning, SLAM on a Linux flight computer).</p>
         <p>Expect a 1-hour all-team meeting every other week, a 1-hour subteam meeting each week, ownership of your tasks, and proactive communication.</p>
       </div>
-      <ApplyForm />
+      <div class="gform reveal">
+        <iframe
+          src={formEmbed}
+          title="WAAR membership application"
+          loading="lazy"
+        >Loading…</iframe>
+        <p class="gform-open">
+          <a href={formOpen} target="_blank" rel="noopener">Open the form in a new tab →</a>
+        </p>
+      </div>
     </div>
   </section>
 </Base>
@@ -95,5 +107,9 @@ const steps = [
   .apply-sec{padding-top:0}
   .about-app{margin-top:22px;max-width:68ch;color:var(--muted);font-size:15px;line-height:1.65;display:grid;gap:14px}
   .about-app strong{color:var(--text);font-weight:600}
+  .gform{margin-top:36px;max-width:820px}
+  .gform iframe{width:100%;height:min(2200px, 90vh);min-height:1400px;border:1px solid var(--line-soft);background:#fff}
+  .gform-open{margin-top:14px;font-size:14.5px}
+  .gform-open a{color:var(--gold)}
   @media (max-width:820px){.steps{grid-template-columns:1fr}}
 </style>
