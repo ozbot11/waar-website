@@ -4,11 +4,7 @@ import MemberCard from '../components/MemberCard.astro';
 import { team } from '../data/team';
 import { technicalLead, deputies, subsystemLeads } from '../data/org';
 
-const leads = team.filter((m) => m.group === 'Leadership');
 const advisors = team.filter((m) => m.group === 'Advisors');
-const orgPeople = [technicalLead, ...deputies, ...subsystemLeads];
-const orgLines = (name: string) =>
-  orgPeople.find((p) => name.startsWith(p.name.split(' ')[0]) || p.name.startsWith(name.split(' ')[0]))?.areas ?? [];
 ---
 <Base title="Team · Washington Aerial Robotics">
   <section class="page-head">
@@ -25,25 +21,6 @@ const orgLines = (name: string) =>
     <div class="container">
       <div class="group-head reveal">
         <span class="mono num">01</span><h2>Leadership</h2>
-      </div>
-      <div class="roster">
-        {leads.map((m, i) => (
-          <MemberCard
-            name={m.name}
-            role={m.role}
-            photo={m.photo}
-            lines={orgLines(m.name)}
-            delay={String(Math.min(i, 3))}
-          />
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="section org-sec">
-    <div class="container">
-      <div class="group-head reveal">
-        <span class="mono num">02</span><h2>Organization</h2>
       </div>
 
       <div class="org">
@@ -94,7 +71,7 @@ const orgLines = (name: string) =>
   <section class="section advisors-sec">
     <div class="container">
       <div class="group-head reveal">
-        <span class="mono num">03</span><h2>Faculty Advisors</h2>
+        <span class="mono num">02</span><h2>Faculty Advisors</h2>
       </div>
       <div class="roster advisors">
         {advisors.map((m, i) => (
@@ -141,6 +118,8 @@ const orgLines = (name: string) =>
   .org-deputies{display:grid;grid-template-columns:repeat(2,minmax(0,280px));justify-content:center;
     gap:clamp(20px,3vw,34px);width:100%}
   .org-deputies :global(.member){width:100%;min-width:0}
-  .org-subs{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(20px,3vw,34px);width:100%}
-  .org-subs :global(.member){width:min(100%,200px);flex:0 0 auto}
+  .org-subs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));justify-content:center;
+    gap:clamp(10px,1.6vw,22px);width:100%}
+  .org-subs :global(.member){width:100%;max-width:none;min-width:0;flex:none}
+  @media (max-width:800px){.org-subs{grid-template-columns:repeat(3,minmax(0,1fr))}}
 </style>
