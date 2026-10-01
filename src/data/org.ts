@@ -95,6 +95,7 @@ export const subsystemLeads: OrgPerson[] = [
   {
     title: 'Perception Lead',
     name: 'Sashmit',
+    photo: '/team/sashmit.png',
     initials: 'SA',
     areas: [
       'Camera Integration',
