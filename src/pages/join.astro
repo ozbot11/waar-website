@@ -7,7 +7,7 @@ const formOpen = `https://docs.google.com/forms/d/e/${formId}/viewform`;
 
 const steps = [
   { n: '01', t: 'Apply', d: 'Fill out the membership application on this page. Returning members and new applicants take different paths — the form will route you.' },
-  { n: '02', t: 'Pick a direction', d: 'Tell us whether you lean Hardware or Software — or that you\u2019re not sure yet. We\u2019ll help you find where you fit.' },
+  { n: '02', t: 'Pick a direction', d: 'Tell us whether you lean Mechanical, Avionics, Firmware, Autonomy, Perception, or Business — or that you\u2019re not sure yet. We\u2019ll help you find where you fit.' },
   { n: '03', t: 'Build', d: 'Get hands-on right away: real drones, real subsystems, real competition deadlines.' },
 ];
 ---
@@ -30,18 +30,42 @@ const steps = [
   <section class="section subteams">
     <div class="container">
       <p class="eyebrow reveal">Where you could work</p>
-      <div class="grid grid-2" style="margin-top:34px">
+      <div class="grid grid-3" style="margin-top:34px">
         <div class="cell reveal">
-          <div class="num">SUBTEAM 01 · HARDWARE</div>
-          <h3 style="margin:14px 0 16px">Build the aircraft</h3>
-          <p class="p">CAD design, drone avionics, prototyping, manufacturing, PCB design, and embedded electronics.</p>
-          <div class="chips"><span class="chip">CAD</span><span class="chip">AVIONICS</span><span class="chip">PCB</span><span class="chip">EMBEDDED</span></div>
+          <div class="num">SUBTEAM 01 · MECHANICAL</div>
+          <h3 style="margin:14px 0 16px">Build the airframe</h3>
+          <p class="p">Testbed and structures design, propulsion integration, and hardware system integration.</p>
+          <div class="chips"><span class="chip">STRUCTURES</span><span class="chip">TESTBED</span><span class="chip">PROPULSION</span><span class="chip">INTEGRATION</span></div>
         </div>
         <div class="cell reveal" data-delay="1">
-          <div class="num">SUBTEAM 02 · SOFTWARE</div>
-          <h3 style="margin:14px 0 16px">Make it autonomous</h3>
-          <p class="p">ROS (C++ / Python), PX4 / Bitcraze, computer vision, path planning, and SLAM.</p>
-          <div class="chips"><span class="chip">ROS</span><span class="chip">PX4</span><span class="chip">VISION</span><span class="chip">SLAM</span></div>
+          <div class="num">SUBTEAM 02 · AVIONICS</div>
+          <h3 style="margin:14px 0 16px">Design the electronics</h3>
+          <p class="p">Flight-controller, power-supply, and ESC PCB design, plus electrical systems integration.</p>
+          <div class="chips"><span class="chip">FLIGHT CONTROLLER</span><span class="chip">POWER</span><span class="chip">ESC</span><span class="chip">ELECTRICAL</span></div>
+        </div>
+        <div class="cell reveal" data-delay="2">
+          <div class="num">SUBTEAM 03 · FIRMWARE</div>
+          <h3 style="margin:14px 0 16px">Run the controllers</h3>
+          <p class="p">Peripherals, flight-control integration, the ground station, comms, and parameter tuning.</p>
+          <div class="chips"><span class="chip">FLIGHT CONTROL</span><span class="chip">GROUND STATION</span><span class="chip">COMMS</span><span class="chip">TUNING</span></div>
+        </div>
+        <div class="cell reveal">
+          <div class="num">SUBTEAM 04 · AUTONOMY</div>
+          <h3 style="margin:14px 0 16px">Decide where to go</h3>
+          <p class="p">Flight and user trajectory planning, multi-agent coordination, and flight-computer software.</p>
+          <div class="chips"><span class="chip">PLANNING</span><span class="chip">MULTI-AGENT</span><span class="chip">FLIGHT COMPUTER</span></div>
+        </div>
+        <div class="cell reveal" data-delay="1">
+          <div class="num">SUBTEAM 05 · PERCEPTION</div>
+          <h3 style="margin:14px 0 16px">Give it eyes</h3>
+          <p class="p">Camera integration, visual detection, SLAM, and mapping.</p>
+          <div class="chips"><span class="chip">CAMERAS</span><span class="chip">DETECTION</span><span class="chip">SLAM</span><span class="chip">MAPPING</span></div>
+        </div>
+        <div class="cell reveal" data-delay="2">
+          <div class="num">SUBTEAM 06 · BUSINESS</div>
+          <h3 style="margin:14px 0 16px">Keep the RSO running</h3>
+          <p class="p">Onboarding, outreach, grants and sponsorships, budgeting, and membership policy.</p>
+          <div class="chips"><span class="chip">ONBOARDING</span><span class="chip">OUTREACH</span><span class="chip">SPONSORSHIPS</span><span class="chip">BUDGET</span></div>
         </div>
       </div>
     </div>
@@ -75,9 +99,12 @@ const steps = [
         drones and develop real design skills — with IARC as the goal. Use your UW email.
       </p>
       <div class="about-app reveal">
-        <p>Three technical subteams: <strong>Hardware</strong> (CAD, structures, prototyping, manufacturing, power integration),
-          <strong>Avionics &amp; Firmware</strong> (PCBs, embedded, flight-controller and ESC firmware in C++ / KiCad),
-          and <strong>Autonomy &amp; Software</strong> (ROS, PX4 / Bitcraze, vision, planning, SLAM on a Linux flight computer).</p>
+        <p>Six subteams: <strong>Mechanical</strong> (structures, testbed, propulsion, hardware integration),
+          <strong>Avionics</strong> (flight-controller, power, and ESC PCBs),
+          <strong>Firmware</strong> (flight-control software, ground station, comms, tuning),
+          <strong>Autonomy</strong> (planning, multi-agent coordination, flight computer),
+          <strong>Perception</strong> (cameras, detection, SLAM, mapping),
+          and <strong>Business</strong> (onboarding, outreach, sponsorships, budget).</p>
         <p>Expect a 1-hour all-team meeting every other week, a 1-hour subteam meeting each week, ownership of your tasks, and proactive communication.</p>
       </div>
       <div class="gform reveal">

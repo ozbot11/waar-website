@@ -78,18 +78,36 @@ import Base from '../layouts/Base.astro';
   <section class="section">
     <div class="container">
       <p class="eyebrow reveal">How we are organized</p>
-      <div class="grid grid-2" style="margin-top:34px">
+      <div class="grid grid-3" style="margin-top:34px">
         <div class="cell reveal">
           <div class="num">SUBTEAM 01</div>
-          <h3 style="margin:14px 0 16px">Hardware</h3>
-          <p class="cell-p">CAD design, drone avionics, prototyping, manufacturing, PCB design, and embedded
-            electronics &mdash; the physical aircraft and the systems that power it.</p>
+          <h3 style="margin:14px 0 16px">Mechanical</h3>
+          <p class="cell-p">Testbed and structures design, propulsion integration, and hardware system integration.</p>
         </div>
         <div class="cell reveal" data-delay="1">
           <div class="num">SUBTEAM 02</div>
-          <h3 style="margin:14px 0 16px">Software</h3>
-          <p class="cell-p">ROS (C++ / Python), PX4 and Bitcraze flight software, computer vision, path
-            planning, and SLAM &mdash; the autonomy that lets the drone fly itself.</p>
+          <h3 style="margin:14px 0 16px">Avionics</h3>
+          <p class="cell-p">Flight-controller, power-supply, and ESC PCB design, plus electrical systems integration.</p>
+        </div>
+        <div class="cell reveal" data-delay="2">
+          <div class="num">SUBTEAM 03</div>
+          <h3 style="margin:14px 0 16px">Firmware</h3>
+          <p class="cell-p">Peripherals, flight-control integration, the ground station, comms, and parameter tuning.</p>
+        </div>
+        <div class="cell reveal">
+          <div class="num">SUBTEAM 04</div>
+          <h3 style="margin:14px 0 16px">Autonomy</h3>
+          <p class="cell-p">Flight and user trajectory planning, multi-agent coordination, and flight-computer software.</p>
+        </div>
+        <div class="cell reveal" data-delay="1">
+          <div class="num">SUBTEAM 05</div>
+          <h3 style="margin:14px 0 16px">Perception</h3>
+          <p class="cell-p">Camera integration, visual detection, SLAM, and mapping.</p>
+        </div>
+        <div class="cell reveal" data-delay="2">
+          <div class="num">SUBTEAM 06</div>
+          <h3 style="margin:14px 0 16px">Business</h3>
+          <p class="cell-p">Onboarding, outreach, grants and sponsorships, budgeting, and membership policy.</p>
         </div>
       </div>
       <div class="reveal" style="margin-top:56px">

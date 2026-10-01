@@ -14,28 +14,62 @@ import DroneHero from '../components/DroneHero.astro';
         Washington Aerial Robotics is a team of students and faculty at the University of Washington,
         Seattle, working together to build autonomous drones. Our purpose is to give the UW engineering
         community opportunities to learn skills in designing, building, and testing autonomous UAVs — and
-        to compete in the International Aerial Robotics Competition. Two subteams make it happen.
+        to compete in the International Aerial Robotics Competition. Six subteams make it happen.
       </p>
 
-      <div class="grid grid-2" style="margin-top:70px">
+      <div class="grid grid-3" style="margin-top:70px">
         <div class="cell reveal">
           <div class="num">SUBTEAM 01</div>
-          <h3 style="margin:14px 0 16px">Hardware</h3>
-          <p class="cell-p">The airframe and everything that keeps it alive: CAD design, drone avionics,
-            prototyping and manufacturing, PCB design, and embedded electronics.</p>
+          <h3 style="margin:14px 0 16px">Mechanical</h3>
+          <p class="cell-p">The airframe itself: testbed and structures design, propulsion integration, and hardware system integration.</p>
           <div class="chips">
-            <span class="chip">CAD</span><span class="chip">AVIONICS</span>
-            <span class="chip">PCB DESIGN</span><span class="chip">EMBEDDED</span>
+            <span class="chip">STRUCTURES</span><span class="chip">TESTBED</span>
+            <span class="chip">PROPULSION</span><span class="chip">INTEGRATION</span>
           </div>
         </div>
         <div class="cell reveal" data-delay="1">
           <div class="num">SUBTEAM 02</div>
-          <h3 style="margin:14px 0 16px">Software</h3>
-          <p class="cell-p">The intelligence in the air: ROS in C++ and Python, PX4 / Bitcraze flight stacks,
-            computer vision, path planning, and SLAM for autonomous navigation.</p>
+          <h3 style="margin:14px 0 16px">Avionics</h3>
+          <p class="cell-p">The electronics stack: flight-controller, power-supply, and ESC PCB design, plus electrical systems integration.</p>
           <div class="chips">
-            <span class="chip">ROS</span><span class="chip">PX4</span>
-            <span class="chip">COMPUTER VISION</span><span class="chip">SLAM</span>
+            <span class="chip">FLIGHT CONTROLLER</span><span class="chip">POWER</span>
+            <span class="chip">ESC</span><span class="chip">ELECTRICAL</span>
+          </div>
+        </div>
+        <div class="cell reveal" data-delay="2">
+          <div class="num">SUBTEAM 03</div>
+          <h3 style="margin:14px 0 16px">Firmware</h3>
+          <p class="cell-p">Onboard and ground software: peripherals, flight-control integration, the ground station, comms, and parameter tuning.</p>
+          <div class="chips">
+            <span class="chip">FLIGHT CONTROL</span><span class="chip">GROUND STATION</span>
+            <span class="chip">COMMS</span><span class="chip">TUNING</span>
+          </div>
+        </div>
+        <div class="cell reveal">
+          <div class="num">SUBTEAM 04</div>
+          <h3 style="margin:14px 0 16px">Autonomy</h3>
+          <p class="cell-p">How the aircraft decides where to go: flight and user trajectory planning, multi-agent coordination, and flight-computer software.</p>
+          <div class="chips">
+            <span class="chip">PLANNING</span><span class="chip">MULTI-AGENT</span>
+            <span class="chip">FLIGHT COMPUTER</span>
+          </div>
+        </div>
+        <div class="cell reveal" data-delay="1">
+          <div class="num">SUBTEAM 05</div>
+          <h3 style="margin:14px 0 16px">Perception</h3>
+          <p class="cell-p">How the aircraft sees: camera integration, visual detection, SLAM, and mapping.</p>
+          <div class="chips">
+            <span class="chip">CAMERAS</span><span class="chip">DETECTION</span>
+            <span class="chip">SLAM</span><span class="chip">MAPPING</span>
+          </div>
+        </div>
+        <div class="cell reveal" data-delay="2">
+          <div class="num">SUBTEAM 06</div>
+          <h3 style="margin:14px 0 16px">Business</h3>
+          <p class="cell-p">The logistics that keep the RSO running: onboarding, outreach, grants and sponsorships, budgeting, and membership policy.</p>
+          <div class="chips">
+            <span class="chip">ONBOARDING</span><span class="chip">OUTREACH</span>
+            <span class="chip">SPONSORSHIPS</span><span class="chip">BUDGET</span>
           </div>
         </div>
       </div>
