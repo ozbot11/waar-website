@@ -82,6 +82,7 @@ export const subsystemLeads: OrgPerson[] = [
   {
     title: 'Autonomy Lead',
     name: 'Siddarth',
+    photo: '/team/siddarth.png',
     initials: 'SI',
     areas: [
       'Flight Trajectory Planning',
