@@ -1,10 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import MemberCard from '../components/MemberCard.astro';
-import { team } from '../data/team';
-import { technicalLead, deputies, subsystemLeads } from '../data/org';
-
-const advisors = team.filter((m) => m.group === 'Advisors');
+import { technicalLead, deputies, subsystemLeads, advisors } from '../data/org';
 ---
 <Base title="Team · Washington Aerial Robotics">
   <section class="page-head">
@@ -77,9 +74,9 @@ const advisors = team.filter((m) => m.group === 'Advisors');
         {advisors.map((m, i) => (
           <MemberCard
             name={m.name}
-            role={m.role}
+            role={m.title}
             photo={m.photo}
-            lines={m.detail ? [m.detail] : []}
+            lines={m.areas ?? []}
             delay={String(i)}
           />
         ))}

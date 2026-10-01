@@ -33,7 +33,7 @@ src/
   components/   Nav, Footer, DroneHero (3D + HUD), DroneViewer (drag-to-orbit)
   layouts/      Base.astro — head, fonts, nav/footer, reveal script
   lib/drone.ts  procedural quadcopter builder (shared by hero + viewer)
-  data/team.ts  roster (placeholder — edit this)
+  data/org.ts   leadership org chart + advisors
   content/updates/  Markdown blog posts (add a .md file = new post)
   pages/        index, about, drones, team, updates/, join, faq
   styles/       global.css design tokens
@@ -43,7 +43,7 @@ public/         favicon, static assets
 ## Customize
 
 - **Colors / type:** all tokens live at the top of `src/styles/global.css`.
-- **Team roster:** edit `src/data/team.ts`. Add photo support later by extending the `Member` type.
+- **Team roster:** edit `src/data/org.ts`.
 - **Updates:** drop a Markdown file into `src/content/updates/` with `title`, `date`, `summary`, `tag` frontmatter.
 - **Application link:** search for `href="#"` in `src/pages/join.astro` and the "Apply" buttons, and paste your live form URL.
 - **Real drone model:** `src/lib/drone.ts` builds a placeholder from primitives. To use a real airframe,

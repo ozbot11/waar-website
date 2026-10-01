@@ -1,4 +1,4 @@
-/** Current org chart. Remove this file + the Organization section on team.astro to revert. */
+/** Leadership org chart and faculty advisors. Edit this file for the Team page. */
 
 export type OrgPerson = {
   title: string;
@@ -101,5 +101,20 @@ export const subsystemLeads: OrgPerson[] = [
       'SLAM',
       'Mapping',
     ],
+  },
+];
+
+export const advisors: OrgPerson[] = [
+  {
+    title: 'Advisor',
+    name: 'Amir Taghavei',
+    photo: '/team/amir.jpg',
+    areas: ['Assistant Professor · Aeronautics & Astronautics'],
+  },
+  {
+    title: 'Advisor',
+    name: 'Sanotosh Devasia',
+    photo: '/team/santosh.jpg',
+    areas: ['Professor · Mechanical Engineering'],
   },
 ];
